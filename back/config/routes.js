@@ -10,4 +10,8 @@ module.exports = function(app){
   
   //COMICS
     app.get('/comics', comics.all);
+    app.get('/comics/:id',comics.info)
+    app.post('/comics',comics.add)
+    app.delete('/comics/:id',comics.delete)
+    app.put('/comics/:id',comics.update)
 }
