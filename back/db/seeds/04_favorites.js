@@ -1,8 +1,8 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('table_name').del()
+  return knex('favorites').del()
     .then(function () {
-      return knex('table_name').insert([
+      return knex('favorites').insert([
         {
           user_id: 1,
           comic_id: 2
