@@ -46,6 +46,14 @@ module.exports = {
           res.sendStatus(401)
         }
       })
+  },
+  update: (req, res) => {
+    knex('users')
+      .where('users.id', req.params.id)
+      .update(req.body, '*')
+      .then(newUser => {
+        res.json(newUser[0])
+      })
   }
 
 }
