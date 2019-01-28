@@ -10,11 +10,13 @@ module.exports = function(app){
     app.get('/', users.index);
     app.post('/login', users.login);
     app.post('/register', users.register);
-    app.put('/users/:id', users.update)
-
+    
   //AUTH
     app.use(jwtAuth());
-  
+
+  //USERS after auth
+    app.put('/users/:id', users.update)
+
   //COMICS
     app.get('/comics', comics.all);
     app.get('/comics/:id', comics.info)
@@ -32,8 +34,21 @@ const jwtAuth = () => {
   const token = req.body.token || req.headers.token || req.query.token;
   
   if (token) {
-    jwt.verify(token, secret);
-
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        return res.status(401).send({
+          message: 'You are not authorized, Please log in to continue.'
+        });
+      } else {
+        delete decoded.password;
+        req.decoded = decoded;
+        next();
+      }
+    })
+  } else {
+    return res.status(401).send({
+      message: 'You are not authorized, Please log in to continue.'
+    });
   }
 
 }
