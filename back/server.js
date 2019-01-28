@@ -6,7 +6,7 @@ const cors = require('cors')
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors())
+app.use(cors());
 
 var routes_setter = require('./config/routes.js');
 routes_setter(app);
