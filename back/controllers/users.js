@@ -1,6 +1,5 @@
 const knex = require("../db/knex.js");
 const hasher = require("../config/hasher.js");
-
 const jwt = require("jsonwebtoken");
 const secret = process.env.JSON_WEBTOKEN || "donuts";
 
@@ -10,6 +9,7 @@ module.exports = {
       res.json(users)
     })
   },
+
   login: (req, res) => {
     knex('users')
       .where('username', req.body.username)
@@ -19,16 +19,23 @@ module.exports = {
           hasher.check(user, req.body)
             .then((matches) => {
               if (matches) {
-                res.json(user)
+                delete user.password;
+                const token = jwt.sign(user, secret)
+                res.json({message: "Successfully signed in", token, user})
               } else {
-                res.sendStatus(401)
+                res.sendStatus(401).send({
+                  message: 'You are not authorized, Please log in to continue.'
+                })
               }
             })
         } else {
-          res.sendStatus(401)
+          res.sendStatus(401).send({
+            message: 'You are not authorized, Please log in to continue.'
+          })
         }
       })
   },
+
   register: (req, res) => {
     knex('users')
       .where('username', req.body.username)
@@ -40,16 +47,19 @@ module.exports = {
               .insert({
                 username: user.username,
                 password: user.password
-              }, '*')
-              .then((result) => {
-                res.json(result[0])
+              }, 'id')
+              .then(() => {
+                res.json({message: "Successfully Registered, please log in"})
               })
           })
         } else {
-          res.sendStatus(401)
+          res.sendStatus(401).send({
+            message: 'You are not authorized, Please log in to continue.'
+          })
         }
       })
   },
+
   update: (req, res) => {
     knex('users')
       .where('users.id', req.params.id)
