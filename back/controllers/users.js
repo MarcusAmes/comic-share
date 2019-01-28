@@ -1,6 +1,9 @@
 const knex = require("../db/knex.js");
 const hasher = require("../config/hasher.js");
 
+const jwt = require("jsonwebtoken");
+const secret = process.env.JSON_WEBTOKEN || "donuts";
+
 module.exports = {
   index: (req, res) => {
     knex("users").then(users => {

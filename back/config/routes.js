@@ -1,7 +1,9 @@
-//Update the name of the controller below and rename the file.
 const users = require("../controllers/users.js");
 const comics = require("../controllers/comics.js");
 const comments = require("../controllers/comments.js");
+const jwt = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET || "donuts";
+
 module.exports = function(app){
 
   //USERS
@@ -9,6 +11,9 @@ module.exports = function(app){
     app.post('/login', users.login);
     app.post('/register', users.register);
     app.put('/users/:id', users.update)
+
+  //AUTH
+    app.use(jwtAuth());
   
   //COMICS
     app.get('/comics', comics.all);
@@ -21,4 +26,14 @@ module.exports = function(app){
     app.get('/comments/:id', comments.onComic);
     app.post('/comments', comments.add)
     app.delete('/comments/:id', comments.remove)
+}
+
+const jwtAuth = () => {
+  const token = req.body.token || req.headers.token || req.query.token;
+  
+  if (token) {
+    jwt.verify(token, secret);
+
+  }
+
 }
