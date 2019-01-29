@@ -12,7 +12,7 @@ module.exports = function(app){
     app.post('/register', users.register);
     
   //AUTH
-    app.use(jwtAuth());
+    app.use(jwtAuth);
 
   //USERS after auth
     app.put('/users/:id', users.update)
@@ -30,7 +30,7 @@ module.exports = function(app){
     app.delete('/comments/:id', comments.remove)
 }
 
-const jwtAuth = () => {
+const jwtAuth = (req, res, next) => {
   const token = req.body.token || req.headers.token || req.query.token;
   
   if (token) {
