@@ -16,5 +16,8 @@
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.13.0",
     "pg": "^7.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0"
   }
 }
