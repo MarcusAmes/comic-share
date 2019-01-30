@@ -1,24 +1,28 @@
 //ACTIONS
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
-const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, payload: user })
 
-export const LOGIN_ERROR = "LOGIN_ERROR"
-const loginError = () => ({ type: LOGIN_ERROR })
+//LOGIN
+  export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+  const loginSuccess = (user) => ({ type: LOGIN_SUCCESS, payload: user })
 
-export const LOGIN_LOADING = "LOGIN_LOADING"
-const loginLoading = () => ({ type: LOGIN_LOADING })
+  export const LOGIN_ERROR = "LOGIN_ERROR"
+  const loginError = () => ({ type: LOGIN_ERROR })
 
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
-const registerSuccess = (msg) => ({ type: REGISTER_SUCCESS, payload: msg })
+  export const LOGIN_LOADING = "LOGIN_LOADING"
+  const loginLoading = () => ({ type: LOGIN_LOADING })
 
-export const REGISTER_ERROR = "REGISTER_ERROR"
-const registerError = () => ({ type: REGISTER_ERROR })
+//REGISTER
+  export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
+  const registerSuccess = (msg) => ({ type: REGISTER_SUCCESS, payload: msg })
 
-export const REGISTER_LOADING = "REGISTER_LOADING"
-const registerLoading = () => ({ type: REGISTER_LOADING })
+  export const REGISTER_ERROR = "REGISTER_ERROR"
+  const registerError = () => ({ type: REGISTER_ERROR })
 
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
-const logoutSuccess = () => ({ type: LOGOUT_SUCCESS })
+  export const REGISTER_LOADING = "REGISTER_LOADING"
+  const registerLoading = () => ({ type: REGISTER_LOADING })
+
+//LOGOUT
+  export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
+  const logoutSuccess = () => ({ type: LOGOUT_SUCCESS })
 
 //THUNKS
 
@@ -26,6 +30,7 @@ export const login = (user) => dispatch => {
   dispatch(
     loginLoading()
   )
+  //FIXME harrison fix this now
   fetch('http://back-dev.us-west-1.elasticbeanstalk.com/login', {
     method: 'POST',
     body: JSON.stringify(user),
