@@ -1,0 +1,6 @@
+import { CREATE_COMMENT_SUCCESS, CREATE_COMMENT_LOADING, CREATE_COMMENT_ERROR, 
+  DELETE_COMMENT_SUCCESS, DELETE_COMMENT_LOADING, DELETE_COMMENT_ERROR } from "../actions/commentActions"
+
+const initState = {
+      comments : []
+}
