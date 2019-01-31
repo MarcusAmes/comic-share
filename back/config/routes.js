@@ -1,6 +1,7 @@
 const users = require("../controllers/users.js");
 const comics = require("../controllers/comics.js");
 const comments = require("../controllers/comments.js");
+const aws = require("../controllers/aws.js");
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET || "donuts";
 
@@ -28,6 +29,9 @@ module.exports = function(app){
     app.get('/comments/:id', comments.onComic);
     app.post('/comments', comments.add)
     app.delete('/comments/:id', comments.remove)
+
+  //UPLOAD
+    app.post('/upload', aws.upload)
 }
 
 const jwtAuth = (req, res, next) => {

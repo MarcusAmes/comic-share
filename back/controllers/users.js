@@ -1,7 +1,7 @@
 const knex = require("../db/knex.js");
 const hasher = require("../config/hasher.js");
 const jwt = require("jsonwebtoken");
-const secret = process.env.JSON_WEBTOKEN || "donuts";
+const secret = process.env.JWT_SECRET || "donuts";
 
 module.exports = {
   index: (req, res) => {
@@ -15,7 +15,6 @@ module.exports = {
       .where('username', req.body.username)
       .then((results) => {
         if (results.length >= 1) {
-          console.log("nope")
           let user = results[0]
           hasher.check(user, req.body)
             .then((matches) => {

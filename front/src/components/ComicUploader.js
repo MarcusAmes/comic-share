@@ -1,37 +1,28 @@
 import React, { Component } from 'react'
-import ReactS3Uploader from 'react-s3-uploader';
 class ComicUploader extends Component {
+
+  state = {
+    file: null
+  }
+
   _onSubmit = (e) => {
     e.preventDefault()
+    const formData = new FormData();
+    formData.append( "file" , this.state.file, this.state.file.name);
+    console.log(formData.get('file'))
+    this.props.upload(formData, this.props.user.token)
   }
 
-  makeid = () => {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < 15; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
+  _onChange = ({target}) => {
+    this.setState({file: target.files[0]})
   }
+
 
   render() {
-    //NOTE temp s3 uploader haven't set up s3
+    //NOTE temp s3 uploader 
     return (
       <form onSubmit={this._onSubmit}>
-        {/* //NOTE Testing a way to upload files to s3
-        <ReactS3Uploader 
-        signingUrl = "http://back-dev.us-west-1.elasticbeanstalk.com/upload"
-        accept = ".pdf"
-        signingUrlHeaders = {
-          {
-            "token": this.props.user.token
-          }
-        }
-        scrubFilename = {
-          (filename) => filename.replace(filename, this.makeid() + ".pdf")
-        }
-        /> */}
+        <input type="file" name="pdf" onChange={this._onChange} />
         <button>Upload</button>
       </form>
     )
