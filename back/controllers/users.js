@@ -15,6 +15,7 @@ module.exports = {
       .where('username', req.body.username)
       .then((results) => {
         if (results.length >= 1) {
+          console.log("nope")
           let user = results[0]
           hasher.check(user, req.body)
             .then((matches) => {
@@ -23,13 +24,13 @@ module.exports = {
                 const token = jwt.sign(user, secret)
                 res.json({message: "Successfully signed in", token, user})
               } else {
-                res.sendStatus(401).send({
+                res.status(401).send({
                   message: 'You are not authorized, Please log in to continue.'
                 })
               }
             })
         } else {
-          res.sendStatus(401).send({
+          return res.status(401).send({
             message: 'You are not authorized, Please log in to continue.'
           })
         }
@@ -53,7 +54,7 @@ module.exports = {
               })
           })
         } else {
-          res.sendStatus(401).send({
+          res.status(401).send({
             message: 'You are not authorized, Please log in to continue.'
           })
         }
