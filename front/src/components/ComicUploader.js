@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactS3Uploader from 'react-s3-uploader';
+// import ReactS3Uploader from 'react-s3-uploader';
 class ComicUploader extends Component {
   _onSubmit = (e) => {
     e.preventDefault()
