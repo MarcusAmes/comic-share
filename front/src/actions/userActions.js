@@ -30,7 +30,6 @@ export const login = (user) => dispatch => {
   dispatch(
     loginLoading()
   )
-  //FIXME harrison fix this now
   fetch('http://back-dev.us-west-1.elasticbeanstalk.com/login', {
     method: 'POST',
     body: JSON.stringify(user),

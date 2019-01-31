@@ -23,22 +23,22 @@ const deleteCommentLoading = () => ({ type: DELETE_COMMENT_LOADING })
 //THUNKS
 
   //CREATE
-export const createComment = (input, token) => dispatch => {
+export const createComment = (comment, token) => dispatch => {
   dispatch(
     createCommentLoading()
   )
   fetch('http://back-dev.us-west-1.elasticbeanstalk.com/comments', {
     method: 'POST',
-    body: JSON.stringify(input),
+    body: JSON.stringify(comment),
     headers: {
       'Content-Type': 'application/json',
       'token' : token
     }
   })
   .then(res => res.json())
-  .then(input => {
+  .then(comment => {
     dispatch(
-      createCommentSuccess(input)
+      createCommentSuccess(comment)
     )
   })
   .catch(err => {
