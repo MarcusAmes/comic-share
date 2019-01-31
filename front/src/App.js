@@ -6,6 +6,7 @@ import TopNavContainer from './containers/TopNavContainer';
 import MainPageContainer from './containers/MainPageContainer';
 import ComicUploaderContainer from './containers/ComicUploaderContainer';
 import ViewerContainer from './containers/ViewerContainer';
+import './App.css'
 
 class App extends Component {
   render() {
