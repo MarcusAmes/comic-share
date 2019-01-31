@@ -31,7 +31,7 @@ export const login = (user) => dispatch => {
     loginLoading()
   )
   //FIXME harrison fix this now
-  fetch('http://back-dev.us-west-1.elasticbeanstalk.com/login', {
+  fetch('http://localhost:8000/login', {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
@@ -55,7 +55,7 @@ export const register = (user) => dispatch => {
   dispatch(
     registerLoading()
   )
-  fetch('http://back-dev.us-west-1.elasticbeanstalk.com/register', {
+  fetch('http://localhost:8000/register', {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
