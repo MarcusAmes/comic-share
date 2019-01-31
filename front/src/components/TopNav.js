@@ -25,6 +25,13 @@ class TopNav extends Component {
               <NavLink tag={Link} to="/home">Home</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/profile">Profile</NavLink>
+            </NavItem>
+            {/* //NOTE For testing s3 upload NOT FINAL  */}
+            <NavItem>
+              <NavLink tag={Link} to="/upload">Upload</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink onClick={this._onClick}>Logout</NavLink>
             </NavItem>
             </>

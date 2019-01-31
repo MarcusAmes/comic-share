@@ -28,6 +28,9 @@ module.exports = function(app){
     app.get('/comments/:id', comments.onComic);
     app.post('/comments', comments.add)
     app.delete('/comments/:id', comments.remove)
+
+  //404
+    app.use()
 }
 
 const jwtAuth = (req, res, next) => {
