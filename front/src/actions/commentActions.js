@@ -7,8 +7,18 @@ const createCommentSuccess = (input) => ({ type: CREATE_COMMENT_SUCCESS, payload
 export const CREATE_COMMENT_ERROR = "CREATE_COMMENT_ERROR"
 const createCommentError = () => ({ type: CREATE_COMMENT_ERROR })
 
-export const CREATE_COMMETN_LOADING = "CREATE_COMMETN_LOADING"
-const createCommentLoading = () => ({ type: CREATE_COMMETN_LOADING })
+export const CREATE_COMMENT_LOADING = "CREATE_COMMENT_LOADING"
+const createCommentLoading = () => ({ type: CREATE_COMMENT_LOADING })
+
+//FETCH
+export const FETCH_COMMENT_SUCCESS = "FETCH_COMMENT_SUCCESS"
+const fetchCommentSuccess = (input) => ({ type: FETCH_COMMENT_SUCCESS, payload: input })
+
+export const FETCH_COMMENT_LOADING = "FETCH_COMMENT_LOADING"
+const fetchCommentError = () => ({ type: FETCH_COMMENT_LOADING })
+
+export const FETCH_COMMENT_ERROR = "FETCH_COMMENT_ERROR"
+const fetchCommentLoading = () => ({ type: FETCH_COMMENT_ERROR })
 
 //DELETE
 export const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS"
@@ -44,6 +54,30 @@ export const createComment = (comment, token) => dispatch => {
   .catch(err => {
     dispatch(
       createCommentError()
+    )
+  })
+}
+
+//FETCH
+export const fetchComments = (token) => dispatch => {
+  dispatch(
+    fetchCommentLoading()
+  )
+  fetch('http://back-dev.us-west-1.elasticbeanstalk.com/comments', {
+    headers: {
+      'Content-Type': 'application/json',
+      'token' : token
+    }
+  })
+  .then(res => res.json())
+  .then(comments => {
+    dispatch(
+      fetchCommentSuccess(comments)
+    )
+  })
+  .catch(err => {
+    dispatch(
+      fetchCommentError()
     )
   })
 }
