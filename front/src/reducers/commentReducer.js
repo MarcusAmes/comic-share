@@ -3,40 +3,39 @@ import { CREATE_COMMENT_SUCCESS, CREATE_COMMENT_LOADING, CREATE_COMMENT_ERROR,
 
 const initState = {
       comments : [],
-      id: "",
-      createCommentLoading: false,
-      createCommentError: false,
-      createCommentSuccess: false,
-      deleteCommentLoding: false, 
-      deleteCommentSuccess: false,
-      deleteCommentError: false
+      commentLoading: false,
+      commentError: false,
 }
-
+//NOTE review my work marcus
 const commentReducer = (state = initState, action)=>{
   switch(action.type) {
     case CREATE_COMMENT_LOADING:
-      return {...state, createCommentLoading: true }
-    case  CREATE_COMMENT_SUCCESS:
+      return {...state, commentLoading: true }
+    case CREATE_COMMENT_SUCCESS:
       return {
         ...state,
         comments : [...state.comments, action.payload.comment],
-      createCommentLoading: false,
-      createCommentError: false,
-      createCommentSuccess: true,
+        commentLoading: false,
+        commentError: false,
       }
     case CREATE_COMMENT_ERROR:
       return {
         ...state,
-        createCommentError: true
+        commentError: true
       }
     case DELETE_COMMENT_LOADING:
       return {...state, deleteCommentLoading: true } 
     case DELETE_COMMENT_SUCCESS:
       return {
         ...state,
-        id: action.payload.id,
-        deleteCommentSuccess: true
+        comments : state.comments.filter(comment => comment.id !== payload.id )
+      }
+    case DELETE_COMMENT_ERROR:
+      return {
+        ...state,
+        commentError: true
       }
   }
-
 }
+
+export default commentReducer
